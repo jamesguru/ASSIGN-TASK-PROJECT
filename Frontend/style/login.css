@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300&display=swap');
+.login{
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    margin: 100px 350px;
+
+
+    color: #444;
+
+
+
+    width: 50%;
+
+    padding: 20px;
+
+
+    height: 70vh;
+
+background-color: #d1411e;
+
+
+    
+}
+
+.login h2{
+
+    color: #fff;
+}
+
+.login input{
+
+
+    margin: 20px;
+
+    padding: 10px;
+
+    width: 300px;
+
+    border: none;
+
+    outline: none;
+}
+
+.btn_login{
+
+    
+    border: none;
+
+    padding: 10px;
+
+    width: 150px;
+
+    font-size: 18px;
+
+
+    cursor: pointer;
+
+    
+}
+
+.login_success{
+
+
+    display: none;
+
+    background-color: #d1411e;
+
+    color:#fff;
+
+    width:300px;
+
+    padding:15px;
+
+    top:30px;
+
+    right:50px;
+
+    position:absolute
+
+}
+
+
+.login_failure{
+
+
+
+    display: none;
+
+    background-color: red;
+
+    color:#fff;
+
+    width:300px;
+
+    padding:15px;
+
+    top:50px;
+
+    right:50px;
+
+    position:absolute
+
+
+}
+
+
+.create-account{
+
+
+    margin-top: 10px;
+
+    color: white;
+
+    cursor: pointer;
+
+    text-decoration: underline;
+}

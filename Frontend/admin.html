@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="./style/admin.css">
+</head>
+<body>
+
+    <div class="task-body">
+
+
+        <div class="menu-bar">
+
+
+            <h3>Menu Bar</h3>
+
+
+            <ul class="select">
+
+                <li class="select-item">Developers</li>
+
+                <li class="show-tasks">Tasks</li>
+
+                <li class="add-tasks">Add Tasks</li>
+
+                <li class="logout">Logout</li>
+            </ul>
+
+        </div>
+    
+        <div class="tasks">
+
+
+            <h3>Developers</h3>
+
+        <ul class="developer-lists">
+
+            <li>
+                <div class="task-item">
+
+                    <input type="checkbox" id=2 class="assign-task">
+    
+    
+                    <span class="title">James Kagunga</span>
+    
+    
+                    <span class="status">assigned</span>
+                </div>
+
+
+            </li>
+
+            <li>
+                <div class="task-item">
+
+                    <input type="checkbox" id=1 class="assign-task">
+    
+    
+                    <span>Grace Mbatia</span>
+    
+    
+                    <span class="status">not assigned</span>
+                </div>
+
+
+            </li>
+
+            <li>
+                <div class="task-item">
+
+                    <input type="checkbox" id=3 class="assign-task">
+    
+    
+                    <span>William Opindo</span>
+    
+    
+                    <span class="status">assigned</span>
+                </div>
+
+
+            </li>
+        </ul>
+            
+
+           
+    
+    
+        </div>
+
+
+        <div class="success">
+
+            You completed the task
+        </div>
+
+
+        
+
+    </div>
+
+    <div class="assign-tasks">
+
+        <ion-icon class="goBack" name="arrow-back"></ion-icon>
+
+       
+
+        <ul class="tasks-list">
+
+            
+        </ul>
+
+        <div class="no-tasks">
+
+            <h1>No Tasks</h1>
+        </div>
+            
+
+        <div class="delete_success">
+
+            You have deleted successfully
+        </div>
+
+
+        <div class="assign_success">
+
+            You have assign the task successfully
+        </div>
+
+
+        <div class="assign_failure">
+
+            You must select a developer first to assign a task
+        </div>
+        
+    </div>
+
+
+
+
+    <div class="add-task">
+
+
+        <ion-icon class="go-back" name="arrow-back">Back</ion-icon>
+
+
+
+            <div class="add-task-input">
+
+
+                <h3>Add task</h3>
+
+
+
+                <label>Title</label>
+
+                <input type="text" class="add-title" placeholder="Add code to the backend">
+
+                <label>Description</label>
+
+                <textarea name="desc" id="" cols="20" rows="10" class="add-desc">Continue with adding the backend code and create backend.</textarea>
+                <label>Date</label>
+            
+                <input type="date" class="add-date" placeholder="Add code to the backend">
+
+                <button class="add-btn">upload</button>
+            </div>
+
+
+            <div class="upload_success">
+
+                You have added a task
+            </div>
+
+
+            <div class="upload_failure">
+
+                Make sure fill forms before uploading
+            </div>
+
+    </div>
+
+    
+    
+
+    
+    <script src="./dist/admin.js"></script>
+
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+</body>
+</html>
