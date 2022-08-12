@@ -56,6 +56,16 @@ AS
  GO
 
 
+ --DELETE DEVELOPER 
+
+ CREATE PROCEDURE deleteDeveloper @id int
+
+ AS
+
+
+ DELETE FROM Developers WHERE developer_id = @id
+
+
 
 -- TASKS
 

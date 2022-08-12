@@ -532,6 +532,13 @@ label{
 
 }
 
+.title-line-through{
+
+    text-decoration: line-through;
+
+    
+}
+
 .logout{
 
     cursor: pointer;

@@ -216,7 +216,7 @@ const fetchDevelopers = () => __awaiter(void 0, void 0, void 0, function* () {
                 ${developer.assigned === "assigned" ? `disabled` : ""}
               >
   
-                  <span class="title">${developer.fullname}</span>
+                  <span class=${developer.assigned === "assigned" ? "title-line-through" : "title"}>${developer.fullname}</span>
 
                   
 
