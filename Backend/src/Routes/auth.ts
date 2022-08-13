@@ -1,13 +1,13 @@
 import express, { Router } from 'express';
-import { registerDeveloper } from '../Controllers/Auth';
+import { register,login } from '../Controllers/Auth';
 
 
 const router = Router();
 
 
 
-router.post('/register',registerDeveloper)
-
+router.post('/register',register)
+router.post('/login',login)
 
 
 

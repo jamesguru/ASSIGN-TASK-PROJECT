@@ -86,6 +86,13 @@ let developers: Developer[] = [];
 
 let dev_id: string | null;
 
+let dev_email:string | null;
+
+let dev_name:string | null;
+
+
+
+
 const fetchTasks = async () => {
   let li = "";
 
@@ -178,7 +185,7 @@ hideAddTask.addEventListener("click", () => {
 
 
 
-const AssignTask = async (id: number) => {
+const AssignTask = async (id: number, title:string) => {
   if (dev_id) {
     fetch(
       `http://localhost:3000/api/tasks/assign/${id}`,
@@ -195,6 +202,9 @@ const AssignTask = async (id: number) => {
         body: JSON.stringify({
           developer_id: dev_id,
           assigned: "assigned",
+          project:title,
+          name:dev_name,
+          email:dev_email,
         }),
       }
     );
@@ -226,6 +236,9 @@ const AssignTask = async (id: number) => {
     }, 2000);
 
     dev_id = null;
+    dev_email = null;
+    dev_name = null;
+
     fetchTasks();
   } else {
     assign_failure.style.display = "flex";
@@ -279,13 +292,12 @@ const DeleteTask = (id: number) => {
     }
   );
 
-  
+  fetchTasks();
 };
 
 addButton.addEventListener("click", () => {
   if (addTitle.value && addDescription.value && addDate.value) {
-    console.log(addTitle.value, addDescription.value, addDate.value);
-
+    
     fetch(
       "http://localhost:3000/api/tasks/",
 
@@ -352,19 +364,20 @@ const fetchDevelopers = async () => {
               <div class="task-item">
   
                 
-                <input type="checkbox" id="checkbox"
+                <input 
                 
-                onclick="CheckBox(${developer.developer_id})"
+                onclick="CheckBox('${developer.developer_id}','${developer.email}','${developer.fullname}')"
+                
+                type="checkbox" id="checkbox"
+                
+               
 
                 ${developer.assigned === "assigned" ? `disabled` : ""}
               >
   
                   <span class=${developer.assigned === "assigned" ? "title-line-through" : "title"}>${developer.fullname}</span>
 
-                  
-
-                  
-                  
+    
                  
                   <span class="completed">
                   
@@ -400,8 +413,25 @@ const fetchDevelopers = async () => {
 
 fetchDevelopers();
 
-function CheckBox(index: string) {
+
+
+
+
+function CheckBox(id: string, email:string, name:string) {
   assignTasks.style.display = "flex";
 
-  dev_id = index;
+  console.log('helloooo')
+
+  dev_id = id;
+
+  dev_email = email;
+
+  dev_name = name;
+
+
+  console.log(dev_email)
+
+  console.log(dev_id)
+
+  console.log(dev_name)
 }

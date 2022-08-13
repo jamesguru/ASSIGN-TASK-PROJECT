@@ -1,6 +1,7 @@
 import express, { Request, RequestHandler, Response } from 'express';
 import  {ExtendendedTask} from '../interface/Task';
 import {connectDB} from '../Helpers/connect_db';
+import sendEmail from '../EmailService/AssignmentEmail'
 
 import mssql from 'mssql';
 
@@ -89,13 +90,13 @@ export const updateTask:RequestHandler<{id:string}> = async (req:ExtendendedTask
 
 }
 
-export const assignTask:RequestHandler<{id:string}> = async (req:ExtendendedTask, res:Response) => {
+export const assignTask:RequestHandler<{id:string}> = async (req:Request, res:Response) => {
 
    
 
     const task_id = req.params.id;
 
-    const {developer_id,assigned} = req.body;
+    const {developer_id,assigned,project,email,name} = req.body;
 
     console.log(developer_id)
 
@@ -103,13 +104,19 @@ export const assignTask:RequestHandler<{id:string}> = async (req:ExtendendedTask
 
     console.log(assigned)
 
+    console.log(email)
+
+    console.log(project)
+
+    console.log(name)
+
     try {
         
         const pool = await connectDB();
 
         const  task = await pool?.request().input('id',mssql.Int,task_id).input('dev_id',mssql.Int,developer_id).input('assigned',mssql.NVarChar,assigned).execute('assignTask');
 
-
+        await sendEmail(name,project,email);
         res.status(201).json({task})
 
     } catch (error) {

@@ -1,6 +1,6 @@
 --MY PROCEDURE 
 
--- GET ALL DEVELOPERS
+-
 
 -- DEVELOPERS
 
@@ -22,6 +22,13 @@ AS
 
 GO
 
+-- GET A DEVELOPER
+
+CREATE PROCEDURE getDeveloper (@email VARCHAR(200))
+
+AS
+
+   SELECT * FROM Developers WHERE email = @email
 
 -- GET ALL DEVELOPERS
 
