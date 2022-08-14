@@ -1,9 +1,12 @@
-import {Response} from 'express';
+import {Response,Request} from 'express';
 import {connectDB} from '../Helpers/connect_db'
 import { Developer } from '../interface/Developers';
-import mssql from 'mssql';
+import mssql, { RequestError } from 'mssql';
 import bcrypt from 'bcrypt'
 import { loginSchema, registerSchema } from '../Helpers/userValidators';
+import jwt from 'jsonwebtoken'
+import { json } from 'stream/consumers';
+import { Data } from '../interface/Data';
 
 
 
@@ -55,6 +58,9 @@ export const login = async(req:Developer,res:Response) => {
 
     const {email,password} =req.body;
 
+
+    
+
     try {
 
 
@@ -84,6 +90,20 @@ export const login = async(req:Developer,res:Response) => {
 
 
 
+       const {role,fullname,developer_id, ...others} = userData;
+
+       const data={ role,fullname,developer_id};
+
+       const token = jwt.sign(data,process.env.KEY as string,{expiresIn:'3000000000000000000000s'});
+
+       res.json({
+
+        message:'Logged in',
+
+        data,
+
+        token
+       })
 
 
     if(error){
@@ -98,3 +118,12 @@ export const login = async(req:Developer,res:Response) => {
 
 
 }
+
+
+export const checkuser = async(req:Request,res:Response) => {
+
+    
+
+
+}
+

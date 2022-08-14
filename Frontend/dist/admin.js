@@ -133,9 +133,6 @@ const AssignTask = (id, title) => __awaiter(void 0, void 0, void 0, function* ()
         setTimeout(() => {
             assign_success.style.display = "none";
         }, 2000);
-        dev_id = null;
-        dev_email = null;
-        dev_name = null;
         fetchTasks();
     }
     else {
@@ -164,7 +161,7 @@ const DeleteTask = (id) => {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        method: "DELETE",
+        method: "PUT",
     });
     fetchTasks();
 };
@@ -199,6 +196,7 @@ addButton.addEventListener("click", () => {
     }
 });
 log_out.addEventListener("click", () => {
+    localStorage.clear();
     location.href = "login.html";
 });
 const fetchDevelopers = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -218,7 +216,7 @@ const fetchDevelopers = () => __awaiter(void 0, void 0, void 0, function* () {
                 
                 <input 
                 
-                onclick="CheckBox('${developer.developer_id}','${developer.email}','${developer.fullname}')"
+                onclick="Checkbox('${developer.developer_id}','${developer.email}','${developer.fullname}')"
                 
                 type="checkbox" id="checkbox"
                 
@@ -262,13 +260,10 @@ const fetchDevelopers = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) { }
 });
 fetchDevelopers();
-function CheckBox(id, email, name) {
+function Checkbox(id, email, name) {
     assignTasks.style.display = "flex";
     console.log('helloooo');
     dev_id = id;
     dev_email = email;
     dev_name = name;
-    console.log(dev_email);
-    console.log(dev_id);
-    console.log(dev_name);
 }

@@ -126,7 +126,7 @@ AS
 
 BEGIN
 
-    UPDATE Tasks SET completed=@completed WHERE id = @id
+    UPDATE Tasks SET completed=@completed WHERE task_id = @id
 
 GO
 

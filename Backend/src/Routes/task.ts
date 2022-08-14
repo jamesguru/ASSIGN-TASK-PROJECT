@@ -7,7 +7,7 @@ const router = Router();
 
 router.get("/",getAllTasks)
 
-router.get("/:id",getTasksForDeveloper)
+router.get("/assigned/:id",getTasksForDeveloper)
 
 router.put("/assign/:id",assignTask)
 

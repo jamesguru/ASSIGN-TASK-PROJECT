@@ -16,12 +16,12 @@ const ejs_1 = __importDefault(require("ejs"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const SendEmail_1 = __importDefault(require("../Helpers/SendEmail"));
 dotenv_1.default.config();
-const sendEmail = (fullname, project, email) => __awaiter(void 0, void 0, void 0, function* () {
-    ejs_1.default.renderFile('templates/completeproject.ejs', { name: fullname, task: project }, (err, data) => __awaiter(void 0, void 0, void 0, function* () {
+const sendCompleteEmail = (name) => __awaiter(void 0, void 0, void 0, function* () {
+    ejs_1.default.renderFile('templates/completeproject.ejs', { name }, (err, data) => __awaiter(void 0, void 0, void 0, function* () {
         let messageoption = {
-            from: email,
+            from: process.env.EMAIL,
             to: process.env.ADMIN_EMAIL,
-            subject: 'I have completed project',
+            subject: `${name} have completed project`,
             html: data,
             attachments: [{
                     filename: 'project.txt',
@@ -36,4 +36,4 @@ const sendEmail = (fullname, project, email) => __awaiter(void 0, void 0, void 0
         }
     }));
 });
-exports.default = sendEmail;
+exports.default = sendCompleteEmail;

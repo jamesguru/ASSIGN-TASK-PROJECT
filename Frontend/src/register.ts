@@ -59,6 +59,9 @@ const registerDeveloper = async () => {
         password.value = "";
 
         confirmed_password.value = "";
+
+
+   
   
   
   }

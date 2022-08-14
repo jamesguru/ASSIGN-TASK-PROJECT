@@ -4,17 +4,17 @@ import sendMail from '../Helpers/SendEmail';
 
 dotenv.config()
 
-const sendEmail = async (fullname:string,project:string,email:string)=> {
+const sendCompleteEmail = async (name:string)=> {
 
 
-    ejs.renderFile('templates/completeproject.ejs',{name:fullname,task:project}, async (err,data) =>{
+    ejs.renderFile('templates/completeproject.ejs',{name}, async (err,data) =>{
 
 
         let messageoption = {
 
-            from:email,
+            from:process.env.EMAIL,
             to:process.env.ADMIN_EMAIL,
-            subject:'I have completed project',
+            subject:`${name} have completed project`,
             html:data,
             attachments:[{
 
@@ -40,4 +40,4 @@ const sendEmail = async (fullname:string,project:string,email:string)=> {
 }
 
 
-export default sendEmail;
+export default sendCompleteEmail;

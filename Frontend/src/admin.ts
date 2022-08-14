@@ -84,11 +84,11 @@ let tasks: Task[] = [];
 
 let developers: Developer[] = [];
 
-let dev_id: string | null;
+let dev_id: string;
 
-let dev_email:string | null;
+let dev_email:string;
 
-let dev_name:string | null;
+let dev_name:string;
 
 
 
@@ -235,10 +235,7 @@ const AssignTask = async (id: number, title:string) => {
       assign_success.style.display = "none";
     }, 2000);
 
-    dev_id = null;
-    dev_email = null;
-    dev_name = null;
-
+    
     fetchTasks();
   } else {
     assign_failure.style.display = "flex";
@@ -286,7 +283,7 @@ const DeleteTask = (id: number) => {
         "Content-Type": "application/json",
       },
 
-      method: "DELETE",
+      method: "PUT",
 
       
     }
@@ -343,7 +340,11 @@ addButton.addEventListener("click", () => {
 });
 
 log_out.addEventListener("click", () => {
+
+  localStorage.clear()
   location.href = "login.html";
+
+
 });
 
 const fetchDevelopers = async () => {
@@ -366,7 +367,7 @@ const fetchDevelopers = async () => {
                 
                 <input 
                 
-                onclick="CheckBox('${developer.developer_id}','${developer.email}','${developer.fullname}')"
+                onclick="Checkbox('${developer.developer_id}','${developer.email}','${developer.fullname}')"
                 
                 type="checkbox" id="checkbox"
                 
@@ -417,7 +418,7 @@ fetchDevelopers();
 
 
 
-function CheckBox(id: string, email:string, name:string) {
+function Checkbox(id: string, email:string, name:string) {
   assignTasks.style.display = "flex";
 
   console.log('helloooo')
@@ -429,9 +430,5 @@ function CheckBox(id: string, email:string, name:string) {
   dev_name = name;
 
 
-  console.log(dev_email)
-
-  console.log(dev_id)
-
-  console.log(dev_name)
+ 
 }

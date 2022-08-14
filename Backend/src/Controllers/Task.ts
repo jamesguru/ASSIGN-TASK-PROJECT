@@ -1,9 +1,11 @@
 import express, { Request, RequestHandler, Response } from 'express';
 import  {ExtendendedTask} from '../interface/Task';
 import {connectDB} from '../Helpers/connect_db';
-import sendEmail from '../EmailService/AssignmentEmail'
+import sendEmail from '../EmailService/AssignmentEmail';
+
 
 import mssql from 'mssql';
+import sendCompleteEmail from '../EmailService/CompleteEmail';
 
 
 export const getAllTasks = async (req:Request,res:Response) => {
@@ -38,7 +40,9 @@ export const getTasksForDeveloper:RequestHandler<{id:string}> = async (req:Exten
 
     const id = req.params.id;
 
-    console.log(id)
+    
+        
+
 
     try {
 
@@ -47,7 +51,9 @@ export const getTasksForDeveloper:RequestHandler<{id:string}> = async (req:Exten
         const task = await pool?.request().input('id',mssql.Int,id).execute('getTaskAssignedToDeveloper');
 
 
-        res.status(200).json({task:task?.recordset});
+        res.status(200).json(task?.recordset[0]);
+
+        
         
     } catch (error) {
         
@@ -57,29 +63,23 @@ export const getTasksForDeveloper:RequestHandler<{id:string}> = async (req:Exten
 }
 
 
-export const updateTask:RequestHandler<{id:string}> = async (req:ExtendendedTask, res:Response) => {
+export const updateTask:RequestHandler<{id:string}> = async (req:Request, res:Response) => {
 
 
     const task_id = req.params.id;
 
-    const {completed} = req.body;
+    const {completed,fullname} = req.body;
 
-    console.log(completed)
-
-
-    console.log('update')
-
-
-
+    
 
 
     try {
         
         const pool = await connectDB();
 
-        const  task = await pool?.request().input('id',mssql.Int,task_id).input('assigned',mssql.NVarChar,completed).execute('updateTask');
-
-
+        const  task = await pool?.request().input('id',mssql.Int,task_id).input('completed',mssql.NVarChar,completed).execute('updateTask');
+        await sendCompleteEmail(fullname)
+        
         res.status(201).json({task})
 
     } catch (error) {
@@ -90,6 +90,8 @@ export const updateTask:RequestHandler<{id:string}> = async (req:ExtendendedTask
 
 }
 
+
+
 export const assignTask:RequestHandler<{id:string}> = async (req:Request, res:Response) => {
 
    
@@ -98,18 +100,7 @@ export const assignTask:RequestHandler<{id:string}> = async (req:Request, res:Re
 
     const {developer_id,assigned,project,email,name} = req.body;
 
-    console.log(developer_id)
-
-    console.log(task_id)
-
-    console.log(assigned)
-
-    console.log(email)
-
-    console.log(project)
-
-    console.log(name)
-
+    
     try {
         
         const pool = await connectDB();

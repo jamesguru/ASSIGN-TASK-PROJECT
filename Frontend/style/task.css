@@ -176,5 +176,22 @@ transition: all 1s ease;
     transition: all 1s ease-in-out;
 }
 
+.none{
+
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 500px;
+    background-color: #d1411e;
+
+    padding: 20px;
+    margin-left: 200px;
+    color: #fff;
+}
+
 
 
