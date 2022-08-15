@@ -60,7 +60,8 @@ const fetchTask = () => {
           
         })
         .catch((err) => {
-          console.log('something went wrong');
+          
+          project.innerHTML=`<h2> You are not assigned project </h2>`;
         });
     } catch (error) {
 

@@ -54,7 +54,7 @@ const fetchTasks = () => __awaiter(void 0, void 0, void 0, function* () {
   
                   <span class="title">${task.title}</span>
 
-                  <span class="title">${task.completed}</span>
+                  <span class="title">${task.completed === 'c' ? "completed" : 'pending'}</span>
 
                   
                   <span class="title">${task.date}</span>

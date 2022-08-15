@@ -6,7 +6,6 @@ import { VerifyToken } from '../Middlewares/Verifytoken';
 const router = Router();
 
 
-
 router.post('/register',register)
 router.post('/login',login)
 router.get('/check',VerifyToken,checkuser)

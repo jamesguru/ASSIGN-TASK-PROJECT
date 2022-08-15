@@ -194,4 +194,46 @@ transition: all 1s ease;
 }
 
 
+h2{
 
+    background-color: #d1411e;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    width: 400px 100px;
+
+    margin:300px;
+
+    color: #fff;
+
+    padding: 20px;
+
+
+    animation: progress 1.5s ease alternate infinite;
+
+
+}
+
+@keyframes progress{
+
+
+    from{
+
+        opacity:1;
+
+        margin-top: 100px;
+    }
+
+
+    to{
+
+        opacity: 0;
+
+        margin-bottom: 10px;
+    }
+}
