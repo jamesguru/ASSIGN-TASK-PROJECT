@@ -107,7 +107,7 @@ export const assignTask:RequestHandler<{id:string}> = async (req:Request, res:Re
 
         const  task = await pool?.request().input('id',mssql.Int,task_id).input('dev_id',mssql.Int,developer_id).input('assigned',mssql.NVarChar,assigned).execute('assignTask');
 
-        await sendEmail(name,project,email);
+        await email ? sendEmail(name,project,email) : '';
         res.status(201).json({task})
 
     } catch (error) {
@@ -117,6 +117,35 @@ export const assignTask:RequestHandler<{id:string}> = async (req:Request, res:Re
 
 
 }
+
+
+export const unassignTask:RequestHandler<{id:string}> = async (req:Request, res:Response) => {
+
+   
+
+    const id = req.params.id;
+
+    const {assigned} = req.body;
+
+    
+    try {
+        
+        const pool = await connectDB();
+
+        const  task = await pool?.request().input('assigned',mssql.Int,assigned).input('id',mssql.Int,id).execute('unassign');
+
+        res.status(201).json({task})
+
+    } catch (error) {
+        
+    }
+
+
+
+}
+
+
+
 
 
 export const deleteTask:RequestHandler<{id:string}> = async (req:Request,res:Response) => {

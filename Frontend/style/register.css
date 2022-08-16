@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300&display=swap');
+
 .register{
 
 
@@ -103,6 +104,8 @@ background-color: #d1411e;
     padding:15px;
 
     top:100px;
+
+    font-weight: 700;
 
     right:50px;
 

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addTask = exports.deleteTask = exports.assignTask = exports.updateTask = exports.getTasksForDeveloper = exports.getAllTasks = void 0;
+exports.addTask = exports.deleteTask = exports.unassignTask = exports.assignTask = exports.updateTask = exports.getTasksForDeveloper = exports.getAllTasks = void 0;
 const connect_db_1 = require("../Helpers/connect_db");
 const AssignmentEmail_1 = __importDefault(require("../EmailService/AssignmentEmail"));
 const mssql_1 = __importDefault(require("mssql"));
@@ -60,13 +60,25 @@ const assignTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const pool = yield (0, connect_db_1.connectDB)();
         const task = yield (pool === null || pool === void 0 ? void 0 : pool.request().input('id', mssql_1.default.Int, task_id).input('dev_id', mssql_1.default.Int, developer_id).input('assigned', mssql_1.default.NVarChar, assigned).execute('assignTask'));
-        yield (0, AssignmentEmail_1.default)(name, project, email);
+        (yield email) ? (0, AssignmentEmail_1.default)(name, project, email) : '';
         res.status(201).json({ task });
     }
     catch (error) {
     }
 });
 exports.assignTask = assignTask;
+const unassignTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { assigned } = req.body;
+    try {
+        const pool = yield (0, connect_db_1.connectDB)();
+        const task = yield (pool === null || pool === void 0 ? void 0 : pool.request().input('assigned', mssql_1.default.Int, assigned).input('id', mssql_1.default.Int, id).execute('unassign'));
+        res.status(201).json({ task });
+    }
+    catch (error) {
+    }
+});
+exports.unassignTask = unassignTask;
 const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const task_id = req.params.id;
     try {

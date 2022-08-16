@@ -144,6 +144,7 @@ const AssignTask = (id, title) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 const DeleteTask = (id) => {
+    console.log(dev_id);
     fetch(`http://localhost:3000/api/tasks/${id}`, {
         headers: {
             Accept: "application/json",
@@ -156,14 +157,19 @@ const DeleteTask = (id) => {
         delete_success.style.display = "none";
     }, 2000);
     fetchTasks();
-    fetch(`http://localhost:3000/api/developers/${dev_id}`, {
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        method: "PUT",
-    });
-    fetchTasks();
+    if (dev_id) {
+        fetch(`http://localhost:3000/api/tasks/unassign/${dev_id}`, {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "PUT",
+            body: JSON.stringify({
+                assigned: "not assigned",
+            }),
+        });
+        fetchTasks();
+    }
 };
 addButton.addEventListener("click", () => {
     if (addTitle.value && addDescription.value && addDate.value) {

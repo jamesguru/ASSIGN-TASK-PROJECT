@@ -3,7 +3,8 @@ const email = document.querySelector(".register_email") as HTMLInputElement;
 const password = document.querySelector(".register_password") as HTMLInputElement;
 const confirmed_password = document.querySelector(".confirm_password") as HTMLInputElement;
 const registerButton = document.querySelector(".btn_register") as HTMLButtonElement;
-const register_failure = document.querySelector('.register_failure') as HTMLDivElement;
+const register_failure = document.querySelector(".register_failure") as HTMLDivElement;
+const register_sucess = document.querySelector(".register_success") as HTMLDivElement;
 const have_account = document.querySelector(".have-account") as HTMLSpanElement;
 
 
@@ -19,12 +20,6 @@ have_account.addEventListener("click",() =>{
 
 const registerDeveloper = async () => {
 
-
-  console.log(full_name.value);
-
-  console.log(email.value)
-
-  console.log(password.value)
 
   if(full_name.value && email.value && password.value ){
   
@@ -61,9 +56,26 @@ const registerDeveloper = async () => {
         confirmed_password.value = "";
 
 
+        register_sucess.style.display = "flex"
+
+
+        setTimeout(() =>{
+
+          register_sucess.style.display = "none";
+        },2500)
+
+
    
   
   
+  }else{
+
+    register_failure.style.display = "flex";
+
+    setTimeout(() =>{
+
+      register_failure.style.display = "none";
+    },2500)
   }
   
   }
@@ -71,6 +83,9 @@ const registerDeveloper = async () => {
   
   
   registerButton.addEventListener("click", () => {
+
+
+    
   
   
       try{
@@ -79,7 +94,14 @@ const registerDeveloper = async () => {
   
       }catch(error){
   
-          console.log('something went wrong');
+          
+
+          register_failure.style.display = "flex";
+
+          setTimeout(() =>{
+
+          register_failure.style.display = "none";
+        },2500)
   
       }
   })

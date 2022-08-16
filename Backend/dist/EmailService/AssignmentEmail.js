@@ -17,21 +17,19 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const SendEmail_1 = __importDefault(require("../Helpers/SendEmail"));
 dotenv_1.default.config();
 const sendEmail = (fullname, project, email) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(email);
     ejs_1.default.renderFile('templates/assignproject.ejs', { name: fullname, task: project }, (err, data) => __awaiter(void 0, void 0, void 0, function* () {
         let messageoption = {
             from: process.env.ADMIN_EMAIL,
             to: email,
-            subject: 'Here is your task',
+            subject: 'You have project to complete',
             html: data,
             attachments: [{
                     filename: 'assignment.txt',
-                    content: `You have been assign the project ${project}`
+                    content: `You have been assign the project`
                 }]
         };
         try {
             (0, SendEmail_1.default)(messageoption);
-            console.log("sent first");
         }
         catch (error) {
             console.log(err);

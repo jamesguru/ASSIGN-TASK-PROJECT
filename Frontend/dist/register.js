@@ -13,15 +13,13 @@ const email = document.querySelector(".register_email");
 const password = document.querySelector(".register_password");
 const confirmed_password = document.querySelector(".confirm_password");
 const registerButton = document.querySelector(".btn_register");
-const register_failure = document.querySelector('.register_failure');
+const register_failure = document.querySelector(".register_failure");
+const register_sucess = document.querySelector(".register_success");
 const have_account = document.querySelector(".have-account");
 have_account.addEventListener("click", () => {
     location.href = "login.html";
 });
 const registerDeveloper = () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(full_name.value);
-    console.log(email.value);
-    console.log(password.value);
     if (full_name.value && email.value && password.value) {
         fetch("http://localhost:3000/api/auth/register/", {
             headers: {
@@ -39,6 +37,16 @@ const registerDeveloper = () => __awaiter(void 0, void 0, void 0, function* () {
         email.value = "";
         password.value = "";
         confirmed_password.value = "";
+        register_sucess.style.display = "flex";
+        setTimeout(() => {
+            register_sucess.style.display = "none";
+        }, 2500);
+    }
+    else {
+        register_failure.style.display = "flex";
+        setTimeout(() => {
+            register_failure.style.display = "none";
+        }, 2500);
     }
 });
 registerButton.addEventListener("click", () => {
@@ -46,6 +54,9 @@ registerButton.addEventListener("click", () => {
         registerDeveloper();
     }
     catch (error) {
-        console.log('something went wrong');
+        register_failure.style.display = "flex";
+        setTimeout(() => {
+            register_failure.style.display = "none";
+        }, 2500);
     }
 });

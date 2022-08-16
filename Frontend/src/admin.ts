@@ -67,7 +67,7 @@ interface Developer {
   role: string;
 }
 
-interface Task {
+interface Project {
   id: number;
   title: string;
   description: string;
@@ -80,7 +80,7 @@ interface Task {
 
 
 
-let tasks: Task[] = [];
+let tasks: Project[] = [];
 
 let developers: Developer[] = [];
 
@@ -249,6 +249,10 @@ const AssignTask = async (id: number, title:string) => {
 };
 
 const DeleteTask = (id: number) => {
+
+
+  console.log(dev_id)
+
   fetch(
     `http://localhost:3000/api/tasks/${id}`,
 
@@ -260,6 +264,9 @@ const DeleteTask = (id: number) => {
       },
 
       method: "DELETE",
+
+
+      
     }
   );
   
@@ -272,9 +279,11 @@ const DeleteTask = (id: number) => {
 
   fetchTasks();
 
+if(dev_id){
+
 
   fetch(
-    `http://localhost:3000/api/developers/${dev_id}`,
+    `http://localhost:3000/api/tasks/unassign/${dev_id}`,
 
     {
       headers: {
@@ -285,11 +294,20 @@ const DeleteTask = (id: number) => {
 
       method: "PUT",
 
-      
+      body: JSON.stringify({
+        
+        assigned: "not assigned",
+        
+      }),
     }
   );
 
   fetchTasks();
+
+
+
+}
+  
 };
 
 addButton.addEventListener("click", () => {

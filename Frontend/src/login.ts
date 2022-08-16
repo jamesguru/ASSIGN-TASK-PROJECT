@@ -10,6 +10,10 @@ const login_failure = document.querySelector(
   ".login_failure"
 ) as HTMLDivElement;
 
+const login_failure_incorrect = document.querySelector(
+  ".login_failure-incorrect"
+) as HTMLDivElement;
+
 const create_account = document.querySelector(
   ".create-account"
 ) as HTMLSpanElement;
@@ -27,51 +31,83 @@ loginButton.addEventListener("click", () => {
     }, 2500);
   } 
 
-  fetch(
-    "http://localhost:3000/api/auth/login/",
 
-    {
-      headers: {
-        "Accept": "application/json",
+  try {
 
-        "Content-Type": "application/json",
-      },
 
-      method: "POST",
-
-      body: JSON.stringify({
-        
-        email: login_email.value,
-
-        password: login_password.value,
-      }),
-    }
-  ).then(res  => res.json())
+    fetch(
+      "http://localhost:3000/api/auth/login/",
   
+      {
+        headers: {
+          "Accept": "application/json",
   
-  .then((data) => {
-
+          "Content-Type": "application/json",
+        },
+  
+        method: "POST",
+  
+        body: JSON.stringify({
+          
+          email: login_email.value,
+  
+          password: login_password.value,
+        }),
+      }
+    ).then(res  => res.json())
     
-    const user = data.data;
+    
+    .then((data) => {
+  
+      
+      const user = data.data;
+  
+  
+      localStorage.setItem('user',JSON.stringify(user))
+  
+      localStorage.setItem('token',JSON.stringify(data.token))
+  
+  
+      if(user.role === "developer"){
+  
+          location.href = 'task.html'
+  
+      }else{
+  
+          location.href = 'admin.html'
+      }
+  
+  
+  
+    }).catch((err) => {
+  
+  
+      console.log(err);
+      login_failure.style.display = "flex";
+
+    setTimeout(() => {
+      login_failure.style.display = "none";
+    }, 2500);
+  
+  
+    })
+    
+  } catch (error) {
 
 
-    localStorage.setItem('user',JSON.stringify(user))
-
-    localStorage.setItem('token',JSON.stringify(data.token))
+  login_failure_incorrect.style.display = "flex"
 
 
-    if(user.role === "developer"){
+  login_failure.style.display = "flex";
 
-        location.href = 'task.html'
+    setTimeout(() => {
+      login_failure.style.display = "none";
+    }, 2500);
+    
+    
+  }
 
-    }else{
-
-        location.href = 'admin.html'
-    }
-
-
-
-  })
+  
   
   
   

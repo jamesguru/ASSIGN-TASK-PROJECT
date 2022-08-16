@@ -98,9 +98,12 @@ function CheckBox(id:number){
           );
 
 
-        success.style.display = 'flex';
+          success.style.display = "flex";
 
-        
+          setTimeout(() => {
+            success.style.display = "none";
+          }, 2000);
+      
 
         fetchTask();
     }catch(err){
