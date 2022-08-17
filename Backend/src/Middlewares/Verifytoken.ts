@@ -20,16 +20,24 @@ export const VerifyToken =(req:Extended, res:Response, next:NextFunction)=>{
      const token = req.headers['token'] as string
 
      if(!token){
-       return res.json({message:'You are Not allowed to access this Route'});
+       return res.json({message:'You do not have token to access this route'});
         
      }
 
-      const data = jwt.verify(token,process.env.KEY as string) as Data
+      jwt.verify(token, process.env.KEY as string,(error,data) => {
 
 
-      req.info =data;
+        if(data){
 
-      next() 
+          res.status(200).json({data});
+          next()
+        }
+
+        return res.json({message:'The token is incorrect'});
+
+
+
+      })
        
    } catch (error) {
 

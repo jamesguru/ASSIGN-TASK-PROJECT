@@ -103,7 +103,7 @@ const fetchTasks = async () => {
       headers: {
         "Accept": "application/json",
 
-        "token" : token,
+       
 
         "Content-Type": "application/json",
       },})
@@ -203,7 +203,7 @@ const AssignTask = async (id: number, title:string) => {
         headers: {
           "Accept": "application/json",
 
-          "token" : token,
+         
 
           "Content-Type": "application/json",
         },
@@ -229,8 +229,7 @@ const AssignTask = async (id: number, title:string) => {
         headers: {
           "Accept": "application/json",
   
-          "token" : token,
-  
+          
           "Content-Type": "application/json",
         },
 
@@ -273,7 +272,7 @@ const DeleteTask = (id: number) => {
       headers: {
         "Accept": "application/json",
 
-        "token" : token,
+       
 
         "Content-Type": "application/json",
       },
@@ -304,7 +303,7 @@ if(dev_id){
       headers: {
         "Accept": "application/json",
 
-        "token" : token,
+        
 
         "Content-Type": "application/json",
       },
@@ -337,7 +336,7 @@ addButton.addEventListener("click", () => {
         headers: {
           "Accept": "application/json",
   
-          "token" : token,
+          
   
           "Content-Type": "application/json",
         },
@@ -388,20 +387,15 @@ const fetchDevelopers = async () => {
   let li = "";
 
   try {
-    fetch("http://localhost:3000/api/developers",{
-      headers: {
-        "Accept": "application/json",
-
-        "token" : token,
-
-        "Content-Type": "application/json",
-      },})
+    fetch("http://localhost:3000/api/developers")
       .then((response) => response.json())
 
       .then((data) => {
         developers = data.developers;
 
         if (developers.length) {
+
+
           developers.forEach((developer) => {
             li += `
               

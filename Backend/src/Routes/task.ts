@@ -6,19 +6,19 @@ import { VerifyToken } from '../Middlewares/Verifytoken';
 
 const router = Router();
 
-router.get("/",VerifyToken, getAllTasks)
+router.get("/",getAllTasks)
 
-router.get("/assigned/:id",VerifyToken,getTasksForDeveloper)
+router.get("/assigned/:id",getTasksForDeveloper)
 
-router.put("/assign/:id",VerifyToken, assignTask)
+router.put("/assign/:id",assignTask)
 
-router.put("/unassign/:id",VerifyToken, unassignTask)
+router.put("/unassign/:id",unassignTask)
 
-router.put("/:id",VerifyToken, updateTask)
+router.put("/:id", updateTask)
 
-router.delete("/:id",VerifyToken, deleteTask)
+router.delete("/:id", deleteTask)
 
-router.post("/",VerifyToken, addTask);
+router.post("/", addTask);
 
 
 

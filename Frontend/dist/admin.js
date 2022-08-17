@@ -30,6 +30,7 @@ const assign_success = document.querySelector(".assign_success");
 const assign_failure = document.querySelector(".assign_failure");
 const noTasks = document.querySelector(".no-tasks");
 const Title = document.querySelector(".title");
+const token = JSON.parse(localStorage.getItem("token"));
 let tasks = [];
 let developers = [];
 let dev_id;
@@ -38,7 +39,12 @@ let dev_name;
 const fetchTasks = () => __awaiter(void 0, void 0, void 0, function* () {
     let li = "";
     try {
-        fetch("http://localhost:3000/api/tasks")
+        fetch("http://localhost:3000/api/tasks", {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+        })
             .then((response) => response.json())
             .then((data) => {
             tasks = data.tasks;
@@ -107,7 +113,7 @@ const AssignTask = (id, title) => __awaiter(void 0, void 0, void 0, function* ()
     if (dev_id) {
         fetch(`http://localhost:3000/api/tasks/assign/${id}`, {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "PUT",
@@ -121,7 +127,7 @@ const AssignTask = (id, title) => __awaiter(void 0, void 0, void 0, function* ()
         });
         fetch(`http://localhost:3000/api/developers/${dev_id}`, {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "PUT",
@@ -147,7 +153,7 @@ const DeleteTask = (id) => {
     console.log(dev_id);
     fetch(`http://localhost:3000/api/tasks/${id}`, {
         headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
         },
         method: "DELETE",
@@ -160,7 +166,7 @@ const DeleteTask = (id) => {
     if (dev_id) {
         fetch(`http://localhost:3000/api/tasks/unassign/${dev_id}`, {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "PUT",
@@ -175,7 +181,7 @@ addButton.addEventListener("click", () => {
     if (addTitle.value && addDescription.value && addDate.value) {
         fetch("http://localhost:3000/api/tasks/", {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "POST",

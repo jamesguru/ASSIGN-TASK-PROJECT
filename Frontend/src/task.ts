@@ -23,10 +23,7 @@ const fetchTask = () => {
       fetch(`http://localhost:3000/api/tasks/assigned/${id}`,{
 
 
-      headers:{
-
-        "token":access_token,
-      }
+      
       })
         .then((response) => response.json())
   
@@ -93,7 +90,7 @@ function CheckBox(id:number){
               headers: {
                 "Accept": "application/json",
 
-                  "token" : access_token,
+                 
       
                 "Content-Type": "application/json",
               },

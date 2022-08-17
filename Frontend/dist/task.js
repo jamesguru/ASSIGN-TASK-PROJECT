@@ -7,10 +7,11 @@ const title = document.querySelector(".title");
 const logout = document.querySelector(".logout");
 const none = document.querySelector(".none");
 const user = JSON.parse(localStorage.getItem("user"));
+const access_token = JSON.parse(localStorage.getItem("token"));
 const id = user.developer_id;
 const fetchTask = () => {
     try {
-        fetch(`http://localhost:3000/api/tasks/assigned/${id}`)
+        fetch(`http://localhost:3000/api/tasks/assigned/${id}`, {})
             .then((response) => response.json())
             .then((data) => {
             console.log(data);
@@ -58,7 +59,7 @@ function CheckBox(id) {
     try {
         fetch(`http://localhost:3000/api/tasks/${id}`, {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "PUT",

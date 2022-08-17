@@ -11,14 +11,18 @@ const VerifyToken = (req, res, next) => {
     try {
         const token = req.headers['token'];
         if (!token) {
-            return res.json({ message: 'You are Not allowed to access this Route' });
+            return res.json({ message: 'You do not have token to access this route' });
         }
-        const data = jsonwebtoken_1.default.verify(token, process.env.KEY);
-        req.info = data;
+        jsonwebtoken_1.default.verify(token, process.env.KEY, (error, data) => {
+            if (data) {
+                res.status(200).json({ data });
+                next();
+            }
+            return res.json({ message: 'The token is incorrect' });
+        });
     }
     catch (error) {
         return res.json({ error });
     }
-    next();
 };
 exports.VerifyToken = VerifyToken;
