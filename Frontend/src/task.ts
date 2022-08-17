@@ -6,6 +6,7 @@ const title = document.querySelector(".title") as HTMLSpanElement;
 const logout = document.querySelector(".logout") as HTMLLIElement;
 const none = document.querySelector(".none") as HTMLDivElement;
 const user = JSON.parse(localStorage.getItem("user") as string);
+const access_token = JSON.parse(localStorage.getItem("token") as string);
 
 
 
@@ -19,7 +20,14 @@ const fetchTask = () => {
     
   
     try {
-      fetch(`http://localhost:3000/api/tasks/assigned/${id}`)
+      fetch(`http://localhost:3000/api/tasks/assigned/${id}`,{
+
+
+      headers:{
+
+        "token":access_token,
+      }
+      })
         .then((response) => response.json())
   
         .then((data) => {
@@ -83,7 +91,9 @@ function CheckBox(id:number){
       
             {
               headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
+
+                  "token" : access_token,
       
                 "Content-Type": "application/json",
               },

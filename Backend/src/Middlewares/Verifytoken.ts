@@ -29,11 +29,13 @@ export const VerifyToken =(req:Extended, res:Response, next:NextFunction)=>{
 
       req.info =data;
 
-      
+      next() 
        
    } catch (error) {
+
     return res.json({error})
+    
    }
 
- next()
+ 
 }

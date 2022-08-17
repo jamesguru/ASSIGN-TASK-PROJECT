@@ -58,6 +58,8 @@ const noTasks = document.querySelector(".no-tasks") as HTMLDivElement;
 
 const Title = document.querySelector(".title") as HTMLSpanElement;
 
+const token = JSON.parse(localStorage.getItem("token") as string)
+
 interface Developer {
   developer_id: number;
   fullname: string;
@@ -97,7 +99,14 @@ const fetchTasks = async () => {
   let li = "";
 
   try {
-    fetch("http://localhost:3000/api/tasks")
+    fetch("http://localhost:3000/api/tasks",{
+      headers: {
+        "Accept": "application/json",
+
+        "token" : token,
+
+        "Content-Type": "application/json",
+      },})
       .then((response) => response.json())
 
       .then((data) => {
@@ -192,7 +201,9 @@ const AssignTask = async (id: number, title:string) => {
 
       {
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
+
+          "token" : token,
 
           "Content-Type": "application/json",
         },
@@ -216,8 +227,10 @@ const AssignTask = async (id: number, title:string) => {
 
       {
         headers: {
-          Accept: "application/json",
-
+          "Accept": "application/json",
+  
+          "token" : token,
+  
           "Content-Type": "application/json",
         },
 
@@ -258,7 +271,9 @@ const DeleteTask = (id: number) => {
 
     {
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
+
+        "token" : token,
 
         "Content-Type": "application/json",
       },
@@ -287,7 +302,9 @@ if(dev_id){
 
     {
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
+
+        "token" : token,
 
         "Content-Type": "application/json",
       },
@@ -318,8 +335,10 @@ addButton.addEventListener("click", () => {
 
       {
         headers: {
-          Accept: "application/json",
-
+          "Accept": "application/json",
+  
+          "token" : token,
+  
           "Content-Type": "application/json",
         },
 
@@ -369,7 +388,14 @@ const fetchDevelopers = async () => {
   let li = "";
 
   try {
-    fetch("http://localhost:3000/api/developers")
+    fetch("http://localhost:3000/api/developers",{
+      headers: {
+        "Accept": "application/json",
+
+        "token" : token,
+
+        "Content-Type": "application/json",
+      },})
       .then((response) => response.json())
 
       .then((data) => {
